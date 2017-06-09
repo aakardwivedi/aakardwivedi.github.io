@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>-->
+        <script src="bower_components/angularjs/angular.min.js" ></script>   
+
+        <!-- Bootstrap -->
+        <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+        <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet"> 
+        <!--
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        
+        -->
+
+</head>
+
+<script>
+var app = angular.module("myShoppingList", []);
+app.controller("myCtrl", function($scope) {
+    $scope.friends = ["Apple","Butter","Charlie","Delta","Echo","Freddy","Shawn"];
+    $scope.total = function() {
+            var count = 0;
+            angular.forEach($scope.friends, function(val) {
+                count += 1;
+            });
+            return count;
+      };
+    $scope.addItem = function () {
+        $scope.errortext = "";
+        if (!$scope.addMe) {return;}
+        if ($scope.friends.indexOf($scope.addMe) == -1) {
+            $scope.friends.push($scope.addMe);
+        } else {
+            $scope.errortext = "The item is already in your shopping list.";
+        }
+        $scope.addMe=null;
+    }
+    $scope.removeItem = function (x) {
+        $scope.errortext = "";
+        $scope.friends.splice(x, 1);
+    }
+});
+</script>
+<style type="text/css">
+.search { position: relative; }
+.search input { text-indent: 30px;}
+.search .fa-search { 
+  position: absolute;
+  top: 9px;
+  left: 300px;
+  font-size: 15px;
+}
+</style>
+<body>
+        <div class="container">
+                <div class="row">
+                        <div ng-app="myShoppingList" ng-controller="myCtrl">
+                                <h3>{{total()}} Friends</h3>
+                                <form ng-submit="addItem()">
+                                        <input ng-model="addMe" placeholder="Another one?" (keyup.enter)="addItem()" class="col-lg-3 col-xs-12">
+                                        <p>{{errortext}}</p>
+                                </form>
+                                <div class="search">
+                                          <span class="fa fa-search"></span>
+                                          <input placeholder="Search" ng-model="filt">
+                                </div>
+                                <div >
+                                        <table class="table table-striped">
+                                                <tbody>
+                                                        <tr ng-repeat="friend in friends | filter:filt">
+                                                        <td scope="row">{{$index + 1}}</td>
+                                                        <td>{{friend}}</td>
+                                                        <td><button ng-click="removeItem($index)" style="background-color: RED; border-radius:5px;">
+                                                        <i class="fa fa-trash-o fa-1x" aria-hidden="true"></i>
+                                                        </button></td>
+                                                        </tr>
+                                                </tbody>
+                                        </table>
+                                </div>                            
+                        </div>
+                </div>
+        </div>
+</body>

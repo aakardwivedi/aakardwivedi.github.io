@@ -1,0 +1,27 @@
+{
+  "name": "friendsapp",
+  "description": "Test Website for Angulat",
+  "main": "index.html",
+  "keywords": [
+    "friends",
+    "App",
+    "FriendsApp"
+  ],
+  "authors": [
+    "Aakar Dwivedi"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angularjs":"1.6.4",
+    "bootstrap": "^3.3.6",
+    "font-awesome": "^4.6.3"
+  }
+}
