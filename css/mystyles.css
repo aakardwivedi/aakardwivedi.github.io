@@ -1,0 +1,10 @@
+.tbl{
+    margin-top:70px;
+}
+.search { position: relative; }
+.search input { text-indent: 30px;}
+.search .fa-search { 
+  position: relative;
+  left: 25px;
+  font-size: 15px;
+}
